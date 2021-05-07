@@ -26,10 +26,8 @@ public class Tracker extends AppCompatActivity {
                 case R.id.home:
                     Intent intent1= new Intent(Tracker.this,Clock.class);
                     startActivity(intent1);
-
                     break;
                 case R.id.tracker:
-
                     break;
                 case R.id.analysis:
                     Intent intent3= new Intent(Tracker.this,Analysis.class);
@@ -38,6 +36,7 @@ public class Tracker extends AppCompatActivity {
             }
             return false;
         });
+
         button =findViewById(R.id.start_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,11 +45,9 @@ public class Tracker extends AppCompatActivity {
             }
 
         });
-
     }
     public void openRecording (){
         Intent intent = new Intent (this,Recording.class);
         startActivity(intent);
-
     }
 }
