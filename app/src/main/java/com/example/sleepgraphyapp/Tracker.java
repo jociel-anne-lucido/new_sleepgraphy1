@@ -37,7 +37,7 @@ public class Tracker extends AppCompatActivity {
             return false;
         });
 
-        button =findViewById(R.id.start_button);
+        button = findViewById(R.id.start_button);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
