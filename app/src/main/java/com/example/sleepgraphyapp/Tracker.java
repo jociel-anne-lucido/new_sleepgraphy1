@@ -38,16 +38,9 @@ public class Tracker extends AppCompatActivity {
         });
 
         button = findViewById(R.id.start_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openRecording();
-            }
-
-        });
+        button.setOnClickListener(v -> openRecording());
     }
     public void openRecording (){
-        Intent intent = new Intent (this,Recording.class);
-        startActivity(intent);
+        startActivity(new Intent (this,Recording.class));
     }
 }

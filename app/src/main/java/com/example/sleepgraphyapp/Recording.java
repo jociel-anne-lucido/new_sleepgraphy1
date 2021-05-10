@@ -26,6 +26,7 @@ public class Recording extends AppCompatActivity {
             timer.stop();
             startActivity(new Intent(Recording.this, Analysis.class));
         });
+
     }
 
     @Override
@@ -44,6 +45,17 @@ public class Recording extends AppCompatActivity {
         } else {
             timer.setBase(SystemClock.elapsedRealtime());
         }
+
+        timer.setOnChronometerTickListener(chronometer -> {
+            long time = SystemClock.elapsedRealtime() - chronometer.getBase();
+            int hr = (int) (time / 3600000);
+            int min = (int) (time - hr * 3600000) / 60000;
+            int sec = (int) (time - hr * 3600000 - min * 60000) / 1000;
+            String hh = hr < 10 ? "0" + hr : hr + "";
+            String mm = min < 10 ? "0" + min : min + "";
+            String ss = sec < 10 ? "0" + sec : sec + "";
+            chronometer.setText(hh + ":" + mm + ":" + ss);
+        });
         timer.start();
     }
 

@@ -47,41 +47,37 @@ public class Assessment extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar4);
         progressBar.setVisibility(View.GONE);
 
-        button_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        button_next.setOnClickListener(v -> {
 
-                if (CheckAnswer()) {
-                    return;
-                }
+            if (CheckAnswer()) {
+                return;
+            }
 
-                StoreAnswer();
-                progressBar.setVisibility(View.VISIBLE);
+            StoreAnswer();
+            progressBar.setVisibility(View.VISIBLE);
 
-                if (quesNum == genQues.questions.length) {
+            if (quesNum == genQues.questions.length) {
 
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    String uid = user.getUid();
-                    DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData")
-                            .child(uid);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String uid = user.getUid();
+                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").child(uid);
 
-                    DatabaseReference pushRef = userRef.push();
-                    String pushId = pushRef.getKey();
-                    data.setPushId(pushId);
-                    pushRef.setValue(data);
+                DatabaseReference pushRef = userRef.push();
+                String pushId = pushRef.getKey();
+                data.setPushId(pushId);
+                pushRef.setValue(data);
 
-                    AssessmentData data = new AssessmentData(bedtime, deepsleep, troublesleep, avesleep, qualitysleep);
-                    pushRef.setValue(data);
+                AssessmentData data = new AssessmentData(bedtime, deepsleep, troublesleep, avesleep, qualitysleep);
+                pushRef.setValue(data);
 
-                    progressBar.setVisibility(View.GONE);
-                    Toast.makeText(Assessment.this, "Registered successfully.", Toast.LENGTH_SHORT).show();
-                    finish();
-                    startActivity(new Intent(Assessment.this, Welcome.class));
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(Assessment.this, "Registered successfully.", Toast.LENGTH_SHORT).show();
+                finish();
+                startActivity(new Intent(Assessment.this, Welcome.class));
 
-                } else {
-                    UpdateQuestion();
-                    progressBar.setVisibility(View.GONE);
-                }
+            } else {
+                UpdateQuestion();
+                progressBar.setVisibility(View.GONE);
             }
         });
 
