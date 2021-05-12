@@ -6,11 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".Clock">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/fragment_container"
-        android:layout_above="@+id/bottom_nav"></FrameLayout>
+        android:layout_above="@+id/bottom_nav">
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
@@ -34,7 +36,6 @@
         android:gravity="center"
         android:textColor="@color/heading"
         android:textSize="35sp"
-
         android:textStyle="bold"></DigitalClock>
 
     <TextView
@@ -42,7 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="178dp"
-        android:background="@drawable/circle2"></TextView>
+        android:background="@drawable/circle2">
+    </TextView>
 
     <TextView
         android:id="@+id/greetings"
@@ -53,7 +55,8 @@
         android:fontFamily="@font/arial_mt_rounded"
         android:textColor="@color/heading"
         android:textSize="36sp"
-        android:textStyle="normal"></TextView>
+        android:textStyle="normal">
+    </TextView>
 
     <TextView
         android:id="@+id/day"
@@ -65,7 +68,8 @@
         android:fontFamily="@font/arial_mt_rounded"
         android:textAlignment="center"
         android:textColor="@color/heading"
-        android:textSize="35sp"></TextView>
+        android:textSize="35sp">
+    </TextView>
 
     <TextView
         android:id="@+id/date"
@@ -78,7 +82,8 @@
         android:textAlignment="center"
         android:textColor="@color/accent"
         android:textSize="24sp"
-        android:textStyle="normal"></TextView>
+        android:textStyle="normal">
+    </TextView>
 
     <ImageView
         android:id="@+id/profile"
