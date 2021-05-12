@@ -15,10 +15,16 @@
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
         app:backgroundTint="@color/white"
-
         app:menu="@menu/menu_button"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true" >
 
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <Button
+        android:id="@+id/add_mood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 
 </RelativeLayout>

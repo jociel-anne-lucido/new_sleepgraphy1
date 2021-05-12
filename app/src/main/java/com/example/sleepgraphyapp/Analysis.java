@@ -4,15 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Analysis extends AppCompatActivity {
 
+    private Button mood_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
+
+        mood_button = findViewById(R.id.add_mood);
 
         BottomNavigationView bottomNavigationView= (BottomNavigationView)findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.analysis);
@@ -36,5 +42,7 @@ public class Analysis extends AppCompatActivity {
             }
             return false;
         });
+
+        mood_button.setOnClickListener(v -> startActivity(new Intent(Analysis.this, Mood.class)));
     }
 }

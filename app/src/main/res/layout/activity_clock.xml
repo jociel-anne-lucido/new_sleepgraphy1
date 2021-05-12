@@ -33,7 +33,7 @@
         android:background="@drawable/circle"
         android:gravity="center"
         android:textColor="@color/heading"
-        android:textSize="35dp"
+        android:textSize="35sp"
 
         android:textStyle="bold"></DigitalClock>
 
@@ -57,7 +57,7 @@
 
     <TextView
         android:id="@+id/day"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_below="@id/digital_clock"
         android:layout_centerInParent="true"
@@ -65,7 +65,7 @@
         android:fontFamily="@font/arial_mt_rounded"
         android:textAlignment="center"
         android:textColor="@color/heading"
-        android:textSize="36sp"></TextView>
+        android:textSize="35sp"></TextView>
 
     <TextView
         android:id="@+id/date"
@@ -84,7 +84,7 @@
         android:id="@+id/profile"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
         android:background="@drawable/user_pic"
