@@ -199,7 +199,7 @@
                 android:layout_height="40dp"
                 android:layout_below="@id/wokeup"
                 android:layout_marginTop="28dp"
-                tools:srcCompat="@drawable/sleepsymbol" />
+                tools:srcCompat="@drawable/sleep_symbol" />
 
             <TextView
                 android:id="@+id/sleep_title"
