@@ -9,8 +9,14 @@ import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Tracker extends AppCompatActivity {
     private Button button;
+
+    String sleepTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +46,18 @@ public class Tracker extends AppCompatActivity {
         button = findViewById(R.id.start_button);
         button.setOnClickListener(v -> openRecording());
     }
+
     public void openRecording (){
-        startActivity(new Intent (this,Recording.class));
+        Date today = Calendar.getInstance().getTime();
+
+        SimpleDateFormat dayFormat = new SimpleDateFormat("hh:mm a");
+        String time = dayFormat.format(today);
+
+        sleepTime = time;
+
+        Intent intent = new Intent (Tracker.this, Recording.class);
+        intent.putExtra("sleepTime", sleepTime);
+        startActivity(intent);
+
     }
 }
