@@ -153,7 +153,7 @@
             app:layout_constraintTop_toBottomOf="@+id/card3" />
 
         <RelativeLayout
-            android:layout_width="333dp"
+            android:layout_width="346dp"
             android:layout_height="165dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/card3"
@@ -190,7 +190,7 @@
                 android:text="00:00"
                 android:textAlignment="center"
                 android:textColor="@color/accent"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -223,7 +223,7 @@
                 android:text="00:00"
                 android:textAlignment="center"
                 android:textColor="@color/accent"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <ImageView
@@ -257,8 +257,9 @@
                 android:text="00:00"
                 android:textAlignment="center"
                 android:textColor="@color/accent"
-                android:textSize="20sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
+
 
             <ImageView
                 android:id="@+id/mood"
@@ -270,25 +271,20 @@
                 android:layout_toEndOf="@id/sleep_title"
                 tools:srcCompat="@drawable/happy" />
 
-            <ImageView
+            <Button
+                android:layout_width="102dp"
                 android:id="@+id/add_mood"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_toEndOf="@id/mood_title"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="90dp"
-                tools:srcCompat="@drawable/ic_edit" />
-
-            <TextView
-                android:id="@+id/mood_title"
-                android:layout_width="50dp"
-                android:layout_height="20dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="96dp"
-                android:layout_toEndOf="@+id/mood"
-                android:fontFamily="@font/arial_nova_light"
+                android:layout_height="50dp"
+                android:layout_below="@+id/sleepdurTime"
+                android:textAllCaps="false"
                 android:text="Mood"
-                android:textColor="@color/heading" />
+                android:background="@drawable/happy"
+                android:textAlignment="textStart"
+                android:layout_marginTop="1dp"
+                android:textColor="@color/heading"
+                android:fontFamily="@font/arial_nova_light"
+                android:layout_toEndOf="@+id/mood"></Button>
+
 
             <TextView
                 android:id="@+id/moodText"
@@ -298,11 +294,12 @@
                 android:layout_marginTop="115dp"
                 android:layout_toEndOf="@+id/mood"
                 android:fontFamily="@font/arial_nova_light"
-                android:text="Relaxing"
+                android:text=""
                 android:textAlignment="center"
                 android:textColor="@color/accent"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
+
 
         </RelativeLayout>
 
