@@ -23,6 +23,7 @@ public class Mood extends AppCompatActivity {
     private Button worst_btn;
     private ImageView moodView, back_btn;
     private String st;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,6 @@ public class Mood extends AppCompatActivity {
                 startActivity(new Intent(Mood.this, Analysis.class));
 
             }
-
 
 
 

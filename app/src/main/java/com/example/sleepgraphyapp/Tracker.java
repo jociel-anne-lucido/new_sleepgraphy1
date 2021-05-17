@@ -29,17 +29,19 @@ public class Tracker extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracker);
-        time1 =findViewById(R.id.time_1);
-        time2 =findViewById(R.id.time_2);
-        time3 =findViewById(R.id.time_3);
-        time4 =findViewById(R.id.time_4);
-        time5 =findViewById(R.id.time_5);
+
+        time1 =findViewById(R.id.time1Text);
+        time2 =findViewById(R.id.time2Text);
+        time3 =findViewById(R.id.time3Text);
+        time4 =findViewById(R.id.time4Text);
+        time5 =findViewById(R.id.time5Text);
+
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
-        String currenTimee = simpleDateFormat.format(calendar.getTime());
+        String currentTime = simpleDateFormat.format(calendar.getTime());
 
         try {
-            Date date = simpleDateFormat.parse(currenTimee);
+            Date date = simpleDateFormat.parse(currentTime);
             calendar.setTime(date);
             calendar.add(Calendar.MINUTE,25);
             String result1 = simpleDateFormat.format(calendar.getTime());
@@ -65,7 +67,6 @@ public class Tracker extends AppCompatActivity {
         catch (Exception e) {
 
         }
-
 
         BottomNavigationView bottomNavigationView= (BottomNavigationView)findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.tracker);
