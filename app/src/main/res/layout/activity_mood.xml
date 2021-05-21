@@ -71,16 +71,6 @@
         app:layout_constraintTop_toBottomOf="@+id/subsleep_txt" />
 
     <ImageView
-        android:id="@+id/moodView"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/good"
-        app:layout_constraintEnd_toEndOf="@+id/box"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/box" />
-
-    <ImageView
         android:id="@+id/back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,102 +98,125 @@
         app:layout_constraintStart_toEndOf="@+id/back"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/submit_button"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/button"
-        android:fontFamily="@font/arial_mt_rounded"
-        android:text="Submit"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:backgroundTint="@color/heading"
-        app:layout_constraintBottom_toBottomOf="@+id/box"
-        app:layout_constraintEnd_toEndOf="@+id/subheading_txt"
-        app:layout_constraintStart_toStartOf="@+id/subheading_txt" />
+        app:layout_constraintEnd_toEndOf="@+id/box"
+        app:layout_constraintStart_toStartOf="@+id/box"
+        app:layout_constraintTop_toTopOf="@+id/box">
 
+        <ImageView
+            android:id="@+id/moodView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/good" />
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
-        app:chipSpacingHorizontal="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
-        app:layout_constraintEnd_toEndOf="@+id/subheading_txt"
-        app:layout_constraintStart_toStartOf="@+id/subheading_txt"
-        app:layout_constraintTop_toTopOf="@+id/box"
-        app:singleLine="false"
-        app:singleSelection="true">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/good_button"
-            style="@style/CustomizedChipStyle"
-            android:layout_width="110dp"
-            android:layout_height="50dp"
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="32dp"
+            android:background="@drawable/button"
             android:fontFamily="@font/arial_mt_rounded"
-            android:text="@string/good_btn"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+            android:layout_below="@id/radioGroup"
+            android:text="Submit"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:backgroundTint="@color/heading" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/relaxing_button"
-            style="@style/CustomizedChipStyle"
-            android:layout_width="120dp"
-            android:layout_height="50dp"
-            android:fontFamily="@font/arial_mt_rounded"
-            android:text="@string/relax_btn"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/moodView"
+            android:layout_marginTop="32dp"
+            android:gravity="center_horizontal"
+            android:layout_alignStart="@+id/submit_button"
+            android:layout_alignEnd="@id/submit_button"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/moodView"
+            app:layout_constraintStart_toStartOf="@+id/moodView"
+            app:layout_constraintTop_toBottomOf="@+id/moodView">
 
-    </com.google.android.material.chip.ChipGroup>
+            <RadioButton
+                android:id="@+id/goodButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:text="Good"
+                android:fontFamily="@font/arial_nova_light"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/heading"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
 
-    <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:chipSpacingHorizontal="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/submit_button"
-        app:layout_constraintEnd_toEndOf="@+id/subheading_txt"
-        app:layout_constraintStart_toStartOf="@+id/subheading_txt"
-        app:layout_constraintTop_toTopOf="@+id/chipGroup"
-        app:singleLine="false"
-        app:singleSelection="true">
+            <RadioButton
+                android:id="@+id/relaxButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:text="Relaxing"
+                android:fontFamily="@font/arial_nova_light"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/heading"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/bad_button"
-            style="@style/CustomizedChipStyle"
-            android:layout_width="110dp"
-            android:layout_height="50dp"
-            android:fontFamily="@font/arial_mt_rounded"
-            android:text="@string/bad_btn"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+            <RadioButton
+                android:id="@+id/sosoButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-320dp"
+                android:layout_marginTop="60dp"
+                android:text="So-so"
+                android:fontFamily="@font/arial_nova_light"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/heading"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/soso_button"
-            style="@style/CustomizedChipStyle"
-            android:layout_width="110dp"
-            android:layout_height="50dp"
-            android:fontFamily="@font/arial_mt_rounded"
-            android:text="@string/soso_btn"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+            <RadioButton
+                android:id="@+id/badButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="60dp"
+                android:text="Bad"
+                android:fontFamily="@font/arial_nova_light"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/heading"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/worst_button"
-            style="@style/CustomizedChipStyle"
-            android:layout_width="110dp"
-            android:layout_height="50dp"
-            android:fontFamily="@font/arial_mt_rounded"
-            android:text="@string/worst_btn"
-            android:textAlignment="center"
-            android:textSize="18sp" />
-    </com.google.android.material.chip.ChipGroup>
+            <RadioButton
+                android:id="@+id/worstButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="60dp"
+                android:text="Worst"
+                android:fontFamily="@font/arial_nova_light"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/heading"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"/>
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

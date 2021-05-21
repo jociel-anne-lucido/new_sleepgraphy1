@@ -4,9 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -60,27 +60,22 @@ public class Assessment extends AppCompatActivity {
 
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String uid = user.getUid();
-                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").child(uid);
-
-                DatabaseReference pushRef = userRef.push();
-                String pushId = pushRef.getKey();
-                data.setPushId(pushId);
-                pushRef.setValue(data);
+                DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").child(uid).child("-AssessmentData");
 
                 AssessmentData data = new AssessmentData(bedtime, deepsleep, troublesleep, avesleep, qualitysleep);
-                pushRef.setValue(data);
 
-                progressBar.setVisibility(View.GONE);
-                Toast.makeText(Assessment.this, "Registered successfully.", Toast.LENGTH_SHORT).show();
-                finish();
-                startActivity(new Intent(Assessment.this, Welcome.class));
+                userRef.setValue(data).addOnCompleteListener(task -> {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(Assessment.this, "Registered successfully.", Toast.LENGTH_SHORT).show();
+                    finish();
+                    startActivity(new Intent(Assessment.this, Welcome.class));
+                });
 
             } else {
                 UpdateQuestion();
                 progressBar.setVisibility(View.GONE);
             }
         });
-
     }
 
     private boolean CheckAnswer() {
@@ -134,7 +129,6 @@ public class Assessment extends AppCompatActivity {
     }
 
     private void UpdateQuestion() {
-
         questionView.setText(genQues.getQuestion(quesNum));
         rbChoice1.setText(genQues.getChoice1(quesNum));
         rbChoice2.setText(genQues.getChoice2(quesNum));

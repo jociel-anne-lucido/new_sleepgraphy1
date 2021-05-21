@@ -5,14 +5,16 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Signup extends AppCompatActivity {
@@ -22,7 +24,9 @@ public class Signup extends AppCompatActivity {
     private ImageView button_back;
     private ProgressBar progressBar;
 
-    String name, age, gender, email, password;
+    String name, age, gender, email, password, uid;
+
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,8 @@ public class Signup extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
+        auth = FirebaseAuth.getInstance();
+
         button_next.setOnClickListener(v -> {
             if (!CheckName() | !CheckAge() | !CheckGender() | !CheckEmail() | !CheckPass()) {
                 return;
@@ -46,29 +52,28 @@ public class Signup extends AppCompatActivity {
 
             progressBar.setVisibility(View.VISIBLE);
 
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
+
+                    FirebaseUser user = auth.getCurrentUser();
+                    uid = user.getUid();
+                    DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("UserData").child(uid);
 
                     // stores user attributes to db
 
                     User data = new User(name, age, gender, email, password);
 
-                    FirebaseDatabase.getInstance().getReference("UserData")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(data).
-                            addOnCompleteListener(task1 -> {
-
-                                progressBar.setVisibility(View.GONE);
-                                startActivity(new Intent(Signup.this, Assessment.class));
-                                finish();
-
-                            });
+                    dbRef.setValue(data).addOnCompleteListener(task1 -> {
+                        progressBar.setVisibility(View.GONE);
+                        startActivity(new Intent(Signup.this, Assessment.class));
+                        finish();
+                    });
 
                 } else {
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(Signup.this, "Email is already registered.", Toast.LENGTH_SHORT).show();
                 }
             });
-
         });
 
         button_back.setOnClickListener(v -> startActivity(new Intent(Signup.this, LoginActivity.class)));

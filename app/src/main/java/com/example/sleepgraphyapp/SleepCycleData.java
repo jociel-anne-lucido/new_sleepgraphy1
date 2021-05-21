@@ -2,15 +2,14 @@ package com.example.sleepgraphyapp;
 
 public class SleepCycleData {
 
-    public long lastRecorded, newRecorded, totalDur;
-    public String moodQual, sleepTime, wakeTime;
+    private String lastRecorded, newRecorded, totalDur, moodQual, sleepTime, wakeTime;
     private String pushId;
 
     public SleepCycleData() {
 
     }
 
-    public SleepCycleData(long lastRecorded, long newRecorded, long totalDur, String moodQual, String sleepTime, String wakeTime) {
+    public SleepCycleData(String lastRecorded, String newRecorded, String totalDur, String moodQual, String sleepTime, String wakeTime) {
         this.lastRecorded = lastRecorded;
         this.newRecorded = newRecorded;
         this.totalDur = totalDur;
@@ -19,27 +18,27 @@ public class SleepCycleData {
         this.wakeTime = wakeTime;
     }
 
-    public long getLastRecorded() {
+    public String getLastRecorded() {
         return lastRecorded;
     }
 
-    public void setLastRecorded(long lastRecorded) {
+    public void setLastRecorded(String lastRecorded) {
         this.lastRecorded = lastRecorded;
     }
 
-    public long getNewRecorded() {
+    public String getNewRecorded() {
         return newRecorded;
     }
 
-    public void setNewRecorded(long newRecorded) {
+    public void setNewRecorded(String newRecorded) {
         this.newRecorded = newRecorded;
     }
 
-    public long getTotalDur() {
+    public String getTotalDur() {
         return totalDur;
     }
 
-    public void setTotalDur(long totalDur) {
+    public void setTotalDur(String totalDur) {
         this.totalDur = totalDur;
     }
 
@@ -51,9 +50,7 @@ public class SleepCycleData {
         this.moodQual = moodQual;
     }
 
-    public String getSleepTime() {
-        return sleepTime;
-    }
+    public String getSleepTime() { return sleepTime; }
 
     public void setSleepTime(String sleepTime) {
         this.sleepTime = sleepTime;
