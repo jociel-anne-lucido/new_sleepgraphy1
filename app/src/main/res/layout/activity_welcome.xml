@@ -25,8 +25,8 @@
         android:fontFamily="@font/arial_mt_rounded"
         android:text="Welcome to"
         android:textColor="@color/subtitle"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textSize="20sp"
+        android:textStyle="bold" ></TextView>
 
     <TextView
         android:id="@+id/title"
@@ -37,13 +37,13 @@
         android:fontFamily="@font/arial_mt_rounded"
         android:text="SLEEPGRAPHY"
         android:textColor="@color/accent"
-        android:textSize="50sp"></TextView>
+        android:textSize="30sp"></TextView>
 
     <ImageView
         android:id="@+id/ss_logo"
-        android:layout_width="350dp"
+        android:layout_width="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_height="350dp"
+        android:layout_height="150dp"
         android:layout_marginTop="200dp"
         android:src="@drawable/logo"></ImageView>
 
@@ -58,7 +58,7 @@
         android:fontFamily="@font/arial_mt_rounded"
         android:text="Please wait while loading..."
         android:textColor="@color/accent"
-        android:textSize="20dp"></TextView>
+        android:textSize="15dp"></TextView>
 
     <ProgressBar
         android:id="@+id/loadingBar"
