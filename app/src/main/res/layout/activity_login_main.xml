@@ -21,7 +21,7 @@
     <View
         android:id="@+id/box"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="210dp"
         android:layout_marginTop="286dp"
         android:background="@drawable/box_bg"
         app:layout_constraintBottom_toBottomOf="parent"
