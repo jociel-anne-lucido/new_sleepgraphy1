@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context=".MainActivity">
+
+
+    <View
+        android:id="@+id/bgbottom"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:background="@drawable/ic_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:id="@+id/bgtop"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:background="@drawable/ic_top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/ss_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:fontFamily="@font/arial_mt_rounded"
+        android:text="LEEPGRAPHY"
+        android:textColor="@color/subtitle"
+        android:layout_toEndOf="@+id/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/ss_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="45sp"></TextView>
+
+    <TextView
+        android:id="@+id/ss_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="83dp"
+        android:fontFamily="@font/arial_nova_light"
+        android:text="Your sleeping companion"
+        android:textColor="@color/subtitle"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ss_title" />
+
+    <ImageView
+        android:id="@+id/ss_logo"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="-28dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:ignore="MissingConstraints"></ImageView>
+</androidx.constraintlayout.widget.ConstraintLayout>
