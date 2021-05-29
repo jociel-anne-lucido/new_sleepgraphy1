@@ -92,6 +92,9 @@ public class Analysis extends AppCompatActivity {
         Intent intent = getIntent();
         mood = intent.getStringExtra("moodQual");
 
+        // to edit
+        olddur = "---";
+
         // handles null value from intent
         if (wake == null && sleep == null && totaldur == null) {
             wake = "---";
