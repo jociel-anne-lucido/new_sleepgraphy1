@@ -1,15 +1,14 @@
 package com.example.sleepgraphyapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,8 +28,8 @@ public class Clock extends AppCompatActivity {
 
         button_profile.setOnClickListener(v -> startActivity(new Intent(Clock.this, UserSettings.class)));
 
-        showDate();
-        showGreetings();
+        ShowDate();
+        ShowGreetings();
 
         BottomNavigationView bottomNavigationView= (BottomNavigationView)findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.home);
@@ -53,7 +52,7 @@ public class Clock extends AppCompatActivity {
         });
     }
 
-    private void showDate() {
+    private void ShowDate() {
         Date today = Calendar.getInstance().getTime();
 
         SimpleDateFormat dayFormat = new SimpleDateFormat("EEEE");
@@ -69,7 +68,7 @@ public class Clock extends AppCompatActivity {
         textViewDate.setText(date);
     }
 
-    private void showGreetings() {
+    private void ShowGreetings() {
         Calendar calendar = Calendar.getInstance();
         int Hours=calendar.get(Calendar.HOUR_OF_DAY);
 

@@ -17,10 +17,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class Analysis extends AppCompatActivity {
 
-    private ImageView mood_button;
-    private TextView wokeUpText, sleepText, totalDuration, newDuration, oldDuration, moodText;
+    private TextView wokeUpText, sleepText, totalDuration, newDuration, oldDuration, moodText, dateText;
 
     String wake, sleep, totaldur, newdur, olddur, mood, uid;
 
@@ -32,17 +35,19 @@ public class Analysis extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
 
-        mood_button = findViewById(R.id.editMood);
+        ImageView mood_button = findViewById(R.id.editMood);
         wokeUpText = findViewById(R.id.wokeupTime);
         sleepText = findViewById(R.id.sleepTime);
         totalDuration = findViewById(R.id.sleepdurTime);
         newDuration = findViewById(R.id.new_duration);
         oldDuration = findViewById(R.id.old_duration);
         moodText = findViewById(R.id.moodText);
+        dateText = findViewById(R.id.date_text);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
 
+        ShowDate();
         GetIntentData();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
@@ -66,6 +71,14 @@ public class Analysis extends AppCompatActivity {
         mood_button.setOnClickListener(v -> startActivity(new Intent(Analysis.this, Mood.class)));
     }
 
+    private void ShowDate() {
+        Date today = Calendar.getInstance().getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+
+        String date = dateFormat.format(today);
+        dateText.setText(date);
+    }
+
     private void GetIntentData() {
         scd = new SleepCycleData();
 
@@ -79,16 +92,14 @@ public class Analysis extends AppCompatActivity {
         Intent intent = getIntent();
         mood = intent.getStringExtra("moodQual");
 
-        // to edit pa hehe
-        newdur = "---";
-        olddur = "---";
-
         // handles null value from intent
         if (wake == null && sleep == null && totaldur == null) {
             wake = "---";
             sleep = "---";
             totaldur = "---";
             mood = "---";
+            newdur = "---";
+            olddur = "---";
         }
 
         // formats totaldur string for sleep duration data
@@ -123,7 +134,7 @@ public class Analysis extends AppCompatActivity {
     }
 
     private void DisplayText() {
-        if (wake == null && sleep == null && totaldur == null) {
+        if (wake == null) {
             wokeUpText.setText("---");
             sleepText.setText("---");
             totalDuration.setText("---");
@@ -138,6 +149,7 @@ public class Analysis extends AppCompatActivity {
             GetNewRecordData();
             GetOldRecordData();
         }
+        ShowDate();
     }
 
     // retrieves data from fb

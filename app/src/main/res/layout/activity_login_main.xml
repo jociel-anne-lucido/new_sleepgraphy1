@@ -95,17 +95,17 @@
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/button"
-        app:backgroundTint="@color/heading"
         android:fontFamily="@font/arial_mt_rounded"
         android:text="Login"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18sp"
+        app:backgroundTint="@color/heading"
         app:layout_constraintBottom_toBottomOf="@+id/box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
@@ -115,7 +115,7 @@
 
     <Button
         android:id="@+id/sign_button"
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="48dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/button"

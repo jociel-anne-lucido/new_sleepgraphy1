@@ -151,69 +151,69 @@
                 android:id="@+id/goodButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="Good"
+                android:layout_marginStart="50dp"
                 android:fontFamily="@font/arial_nova_light"
-                android:textStyle="bold"
-                android:textSize="26dp"
-                android:textColor="@color/heading"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"/>
+                android:paddingEnd="8dp"
+                android:text="Good"
+                android:textColor="@color/heading"
+                android:textSize="26dp"
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/relaxButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:text="Relaxing"
+                android:layout_marginStart="80dp"
                 android:fontFamily="@font/arial_nova_light"
-                android:textStyle="bold"
-                android:textSize="26dp"
-                android:textColor="@color/heading"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"/>
+                android:paddingEnd="8dp"
+                android:text="Relaxing"
+                android:textColor="@color/heading"
+                android:textSize="26dp"
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/sosoButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="-320dp"
+                android:layout_marginStart="-400dp"
                 android:layout_marginTop="60dp"
-                android:text="So-so"
                 android:fontFamily="@font/arial_nova_light"
-                android:textStyle="bold"
-                android:textSize="26dp"
-                android:textColor="@color/heading"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"/>
+                android:paddingEnd="8dp"
+                android:text="So-so"
+                android:textColor="@color/heading"
+                android:textSize="26dp"
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/badButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="50dp"
                 android:layout_marginTop="60dp"
-                android:text="Bad"
                 android:fontFamily="@font/arial_nova_light"
-                android:textStyle="bold"
-                android:textSize="26dp"
-                android:textColor="@color/heading"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"/>
+                android:paddingEnd="8dp"
+                android:text="Bad"
+                android:textColor="@color/heading"
+                android:textSize="26dp"
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/worstButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
+                android:layout_marginStart="50dp"
                 android:layout_marginTop="60dp"
-                android:text="Worst"
                 android:fontFamily="@font/arial_nova_light"
-                android:textStyle="bold"
-                android:textSize="26dp"
-                android:textColor="@color/heading"
                 android:paddingStart="8dp"
-                android:paddingEnd="8dp"/>
+                android:paddingEnd="8dp"
+                android:text="Worst"
+                android:textColor="@color/heading"
+                android:textSize="26dp"
+                android:textStyle="bold" />
 
         </RadioGroup>
 

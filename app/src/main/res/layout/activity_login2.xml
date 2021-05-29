@@ -71,16 +71,17 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_box"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="53dp"
+        android:layout_height="60dp"
         android:layout_marginTop="48dp"
         android:ems="10"
         android:fontFamily="sans-serif"
-        android:hint="Email"
-        android:textSize="21sp"
-        android:textAlignment="gravity"
         android:inputType="textEmailAddress"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:textAlignment="gravity"
+        android:textSize="18sp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="@id/subheading_txt"
         app:layout_constraintStart_toStartOf="@id/subheading_txt"
         app:layout_constraintTop_toTopOf="@+id/box">
@@ -89,40 +90,45 @@
             android:id="@+id/email_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="20dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/edittext_bg"
+            android:hint="Email"
             android:inputType="textEmailAddress"
-            android:layout_marginRight="24dp"
-            android:textSize="20sp"
-            android:layout_marginLeft="18dp"></com.google.android.material.textfield.TextInputEditText>
+            android:textSize="18sp">
+        </com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/pass_box"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="53dp"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:ems="10"
         android:fontFamily="sans-serif"
-        android:hint="Password"
         android:inputType="textPassword"
-        android:textSize="21sp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:passwordToggleEnabled="true"
+        android:textSize="18sp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="@+id/subheading_txt"
         app:layout_constraintStart_toStartOf="@+id/subheading_txt"
-        app:layout_constraintTop_toBottomOf="@+id/email_box" >
+        app:layout_constraintTop_toBottomOf="@+id/email_box"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/pass_input"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:background="@drawable/edittext_bg"
-            android:id="@+id/pass_input"
-            android:textSize="20sp"
+            android:ems="10"
+            android:hint="Password"
             android:inputType="textPassword"
-            android:layout_marginRight="24dp"
-            android:layout_marginLeft="18dp"
-            android:ems="10"></com.google.android.material.textfield.TextInputEditText>
+            android:textSize="18sp">
+        </com.google.android.material.textfield.TextInputEditText>
 
     </com.google.android.material.textfield.TextInputLayout>
 
