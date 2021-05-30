@@ -32,7 +32,7 @@
         android:id="@+id/ss_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
+        android:layout_marginStart="148dp"
         android:fontFamily="@font/arial_mt_rounded"
         android:text="LEEPGRAPHY"
         android:textColor="@color/subtitle"
@@ -47,7 +47,7 @@
         android:id="@+id/ss_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="83dp"
+        android:layout_marginStart="102dp"
         android:fontFamily="@font/arial_nova_light"
         android:text="Your sleeping companion"
         android:textColor="@color/subtitle"
@@ -58,7 +58,7 @@
 
     <ImageView
         android:id="@+id/ss_logo"
-        android:layout_width="250dp"
+        android:layout_width="220dp"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/logo"
         tools:layout_editor_absoluteX="-28dp"

@@ -9,5 +9,6 @@
     <color name="button">#9A8C98</color>
     <color name="black">#FF000000</color>
     <color name="white">#F2F2F2</color>
+    <color name="whitesmoke">#A9A9A9</color>
     <color name= "outline" tools:override= "true">#4A4E69</color>
 </resources>

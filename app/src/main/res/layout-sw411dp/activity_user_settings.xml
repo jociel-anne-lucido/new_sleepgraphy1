@@ -54,7 +54,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/logout_button"
         app:layout_constraintStart_toStartOf="@+id/passView"
-        app:layout_constraintTop_toBottomOf="@+id/upd_pass" />
+        app:layout_constraintTop_toBottomOf="@+id/upd_box8" />
 
     <TextView
         android:id="@+id/nameView"
@@ -78,6 +78,7 @@
         android:drawablePadding="10dp"
         android:ems="10"
         android:textSize="15dp"
+        android:textColorHint="@color/whitesmoke"
         android:hint="Name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="@+id/logout_button"
@@ -106,6 +107,7 @@
         android:drawableLeft="@drawable/ic_email"
         android:drawablePadding="10dp"
         android:ems="10"
+        android:textColorHint="@color/whitesmoke"
         android:hint="Email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/logout_button"
@@ -124,21 +126,33 @@
         app:layout_constraintStart_toStartOf="@+id/settings_txt"
         app:layout_constraintTop_toBottomOf="@+id/upd_email" />
 
-    <EditText
-        android:id="@+id/upd_pass"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/upd_box8"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="46dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:drawableLeft="@drawable/ic_pass"
-        android:drawablePadding="10dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:textSize="15dp"
         android:hint="Password"
+        android:textColorHint="@color/whitesmoke"
         android:inputType="textVisiblePassword|textPassword"
+        app:passwordToggleEnabled="true"
         app:layout_constraintEnd_toEndOf="@+id/logout_button"
         app:layout_constraintStart_toStartOf="@+id/nameView"
-        app:layout_constraintTop_toBottomOf="@+id/passView" />
+        app:layout_constraintTop_toBottomOf="@+id/passView" >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/upd_pass"
+            android:drawableStart="@drawable/ic_pass"
+            android:background="@color/background"
+            android:layout_marginStart="-15dp"
+            android:drawablePadding="10dp"
+            android:textSize="16dp"></com.google.android.material.textfield.TextInputEditText>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
         android:id="@+id/back_button"

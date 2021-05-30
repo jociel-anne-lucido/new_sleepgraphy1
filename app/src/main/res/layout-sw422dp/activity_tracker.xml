@@ -9,12 +9,12 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:id="@+id/bottom_nav"
         app:itemBackground="@color/accent"
         app:itemTextColor="@color/white"
         app:itemIconTint="@color/white"
-        app:backgroundTint="@color/white"
+        app:backgroundTint="@color/accent"
         app:menu="@menu/menu_button"
         android:layout_alignParentBottom="true" />
 
