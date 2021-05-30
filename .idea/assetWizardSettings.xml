@@ -339,7 +339,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/edit/baseline_edit_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/remove/baseline_remove_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -350,7 +350,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="4a4e69" />
-                            <entry key="outputName" value="ic_edit" />
+                            <entry key="outputName" value="ic_baseline_remove_24" />
                             <entry key="sourceFile" value="C:\Users\dell\Documents\PUP\CET4\DESIGN\APP\bottom.svg" />
                           </map>
                         </option>
