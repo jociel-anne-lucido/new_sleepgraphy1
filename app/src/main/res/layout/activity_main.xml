@@ -46,7 +46,7 @@
         android:id="@+id/ss_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
+        android:layout_marginStart="50dp"
         android:fontFamily="@font/arial_nova_light"
         android:text="Your sleeping companion"
         android:textColor="@color/subtitle"
