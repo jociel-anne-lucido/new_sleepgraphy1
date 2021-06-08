@@ -1,41 +1,54 @@
 package com.example.sleepgraphyapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.ImageView;
+import android.preference.PreferenceManager;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Analysis extends AppCompatActivity {
 
-    private TextView wokeUpText, sleepText, totalDuration, newDuration, oldDuration, moodText, dateText;
+    private TextView wokeUpText, sleepText, totalDuration, newDuration, oldDuration, moodText, dateText, aveText;
 
-    String wake, sleep, totaldur, newdur, olddur, mood, uid;
+    String wake, sleep, totaldur, newdur, olddur, mood, uid, pushid;
+
+    GraphView graph;
+    LineGraphSeries line;
 
     SleepCycleData scd;
     FirebaseUser user;
+    DatabaseReference userRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analysis);
 
-        ImageView mood_button = findViewById(R.id.editMood);
         wokeUpText = findViewById(R.id.wokeupTime);
         sleepText = findViewById(R.id.sleepTime);
         totalDuration = findViewById(R.id.sleepdurTime);
@@ -43,9 +56,15 @@ public class Analysis extends AppCompatActivity {
         oldDuration = findViewById(R.id.old_duration);
         moodText = findViewById(R.id.moodText);
         dateText = findViewById(R.id.date_text);
+        aveText = findViewById(R.id.average);
+
+        graph = findViewById(R.id.graph);
+        line = new LineGraphSeries();
+        graph.addSeries(line);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         uid = user.getUid();
+        userRef = FirebaseDatabase.getInstance().getReference("UserData").child(uid).child("-SleepData");
 
         ShowDate();
         GetIntentData();
@@ -67,33 +86,23 @@ public class Analysis extends AppCompatActivity {
                     break;
             } return false;
         });
-
-        mood_button.setOnClickListener(v -> startActivity(new Intent(Analysis.this, Mood.class)));
     }
 
     private void ShowDate() {
         Date today = Calendar.getInstance().getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
-
-        String date = dateFormat.format(today);
-        dateText.setText(date);
+        dateText.setText(dateFormat.format(today));
     }
 
     private void GetIntentData() {
         scd = new SleepCycleData();
 
-        // from recording class
-        Intent newIntent = getIntent();
-        wake = newIntent.getStringExtra("wakeTime");
-        sleep = newIntent.getStringExtra("sleepTime");
-        totaldur = newIntent.getStringExtra("totalDur");
-
         // from mood class
         Intent intent = getIntent();
+        wake = intent.getStringExtra("wakeTime");
+        sleep = intent.getStringExtra("sleepTime");
+        totaldur = intent.getStringExtra("totalDur");
         mood = intent.getStringExtra("moodQual");
-
-        // to edit
-        olddur = "---";
 
         // handles null value from intent
         if (wake == null && sleep == null && totaldur == null) {
@@ -110,6 +119,10 @@ public class Analysis extends AppCompatActivity {
             String text = totaldur;
             String[] sep = text.split(":");
             newdur = (sep[0] + "hr" + sep[1] + "min");
+
+            GetLastRecorded();
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+            olddur = pref.getString("lastRecorded", "");
         }
 
         // stores sleep data attributes to sleepcycledata class
@@ -125,126 +138,129 @@ public class Analysis extends AppCompatActivity {
     }
 
     private void StoreData() {
-        // push sleep data attributes to fb
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").child(uid).child("-SleepData");
+        pushid = userRef.push().getKey();
 
         SleepCycleData data = new SleepCycleData(olddur, newdur, totaldur, mood, sleep, wake);
 
         if (!wake.equals("---")) {
-            userRef.setValue(data);
+            userRef.child(pushid).setValue(data);
         }
         DisplayText();
     }
 
     private void DisplayText() {
-        if (wake == null) {
-            wokeUpText.setText("---");
-            sleepText.setText("---");
-            totalDuration.setText("---");
-            moodText.setText("---");
-            oldDuration.setText("---");
-            newDuration.setText("---");
-        }  else {
-            GetSleepTimeData();
-            GetWokeTimeData();
-            GetTotalDurData();
-            GetMoodQualData();
-            GetNewRecordData();
-            GetOldRecordData();
-        }
-        ShowDate();
+        GetAllData();
+        DisplayGraphSQ();
     }
 
     // retrieves data from fb
-    private void GetSleepTimeData() {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").
-                child(uid).child("-SleepData").child("sleepTime");
+    private void GetAllData() {
+        Query query = userRef.orderByKey().limitToLast(1);
 
-        userRef.addValueEventListener(new ValueEventListener() {
+        query.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                sleep = snapshot.getValue(String.class);
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                sleep = snapshot.child("sleepTime").getValue(String.class);
+                wake = snapshot.child("wakeTime").getValue(String.class);
+                totaldur = snapshot.child("totalDur").getValue(String.class);
+                mood = snapshot.child("moodQual").getValue(String.class);
+                newdur = snapshot.child("newRecorded").getValue(String.class);
+                olddur = snapshot.child("lastRecorded").getValue(String.class);
+
                 sleepText.setText(sleep);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
-    }
-
-    private void GetWokeTimeData() {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").
-                child(uid).child("-SleepData").child("wakeTime");
-
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                wake = snapshot.getValue(String.class);
                 wokeUpText.setText(wake);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
-    }
-
-    private void GetTotalDurData() {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").
-                child(uid).child("-SleepData").child("totalDur");
-
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                totaldur = snapshot.getValue(String.class);
                 totalDuration.setText(totaldur);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
-    }
-
-    private void GetMoodQualData() {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").
-                child(uid).child("-SleepData").child("moodQual");
-
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mood = snapshot.getValue(String.class);
                 moodText.setText(mood);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
-    }
-
-    private void GetNewRecordData() {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").
-                child(uid).child("-SleepData").child("newRecorded");
-
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                newdur = snapshot.getValue(String.class);
                 newDuration.setText(newdur);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        });
-    }
-
-    private void GetOldRecordData() {
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("UserData").
-                child(uid).child("-SleepData").child("lastRecorded");
-
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                olddur = snapshot.getValue(String.class);
                 oldDuration.setText(olddur);
             }
             @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) { }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+
+            @Override
             public void onCancelled(@NonNull DatabaseError error) { }
         });
     }
 
+    private void GetLastRecorded() {
+        Query query = userRef.orderByChild("lastRecorded").limitToLast(1);
 
+        query.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                olddur = snapshot.child("newRecorded").getValue(String.class);
+
+                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(Analysis.this);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("lastRecorded", olddur);
+                editor.apply();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) { }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+    }
+
+    private void DisplayGraphSQ() {
+        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
+        gridLabel.setPadding(60);
+        gridLabel.setVerticalAxisTitle("Duration");
+        gridLabel.setHorizontalAxisTitle("Input");
+        gridLabel.setHumanRounding(false);
+
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setMinX(1);
+        graph.getViewport().setMaxX(2);
+
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setMaxY(1);
+        graph.getViewport().setScrollable(true);
+
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                DataPoint[] data = new DataPoint[(int) snapshot.getChildrenCount()];
+                int index = 0, x = 0;
+
+                // for sleep quality
+                double total = 0.0, average;
+
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    SleepCycleData scd = dataSnapshot.getValue(SleepCycleData.class);
+
+                    float duration = Float.parseFloat(scd.getTotalDur().replace(":","."));
+                    long count = snapshot.getChildrenCount();
+                    total += duration;
+                    average = (total / count);
+
+                    DecimalFormat df = new DecimalFormat("#.##");
+                    aveText.setText(df.format(average));
+
+                    x += 1;
+                    data[index] = new DataPoint(x, duration);
+                    index++;
+                }
+                line.resetData(data);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) { }
+        });
+    }
 }

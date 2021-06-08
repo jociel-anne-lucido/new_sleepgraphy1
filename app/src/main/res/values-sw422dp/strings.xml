@@ -30,6 +30,8 @@
     <string name="editprofile_page">Enter your new data in the provided field and press update to save your changes.</string>
     <string name="mood_page">To help us determine your sleep quality, please select your wake up mood below.</string>
 
+    <string name="no_text">---</string>
+
     <!-- Buttons -->
 
     <string name="submit_btn">Submit</string>

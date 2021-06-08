@@ -41,7 +41,7 @@
             android:id="@+id/card1"
             android:layout_width="0dp"
             android:layout_height="130dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/rectangle"
             app:backgroundTint="#D9D9D9"
             app:layout_constraintEnd_toStartOf="@+id/card2"
@@ -63,7 +63,7 @@
         <ImageView
             android:id="@+id/card3"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="235dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="30dp"
@@ -71,6 +71,17 @@
             app:layout_constraintEnd_toEndOf="@+id/card2"
             app:layout_constraintStart_toStartOf="@+id/title_text"
             app:layout_constraintTop_toBottomOf="@+id/card1" />
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="235dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/card3"
+            app:layout_constraintEnd_toEndOf="@+id/card3"
+            app:layout_constraintStart_toStartOf="@+id/card3"
+            app:layout_constraintTop_toTopOf="@+id/card3" />
 
         <TextView
             android:id="@+id/sleepdur"
@@ -90,6 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:fontFamily="@font/arial_mt_rounded"
+            android:text="@string/no_text"
             android:textAlignment="center"
             android:textColor="@color/accent"
             android:textSize="24sp"
@@ -116,6 +128,7 @@
             android:layout_marginTop="6dp"
             android:layout_marginBottom="6dp"
             android:fontFamily="@font/arial_mt_rounded"
+            android:text="@string/no_text"
             android:textAlignment="center"
             android:textColor="@color/accent"
             android:textSize="24sp"
@@ -137,6 +150,20 @@
             app:layout_constraintEnd_toEndOf="@+id/card2"
             app:layout_constraintStart_toStartOf="@+id/card2"
             app:layout_constraintTop_toTopOf="@+id/card1" />
+
+        <TextView
+            android:id="@+id/average"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arial_mt_rounded"
+            android:text="@string/no_text"
+            android:textAlignment="center"
+            android:textColor="@color/accent"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="@+id/card2"
+            app:layout_constraintEnd_toEndOf="@+id/sleepqual"
+            app:layout_constraintStart_toStartOf="@+id/sleepqual"
+            app:layout_constraintTop_toTopOf="@+id/sleepqual" />
 
         <TextView
             android:id="@+id/sleepinfo"
@@ -187,6 +214,7 @@
                 android:layout_marginTop="34dp"
                 android:layout_toEndOf="@+id/wokeup"
                 android:fontFamily="@font/arial_nova_light"
+                android:text="@string/no_text"
                 android:textAlignment="center"
                 android:textColor="@color/accent"
                 android:textSize="22sp"
@@ -220,6 +248,7 @@
                 android:layout_marginTop="104dp"
                 android:layout_toEndOf="@+id/sleep"
                 android:fontFamily="@font/arial_nova_light"
+                android:text="@string/no_text"
                 android:textAlignment="center"
                 android:textColor="@color/accent"
                 android:textSize="22sp"
@@ -253,6 +282,7 @@
                 android:layout_marginTop="34dp"
                 android:layout_toEndOf="@+id/sleepdrtn"
                 android:fontFamily="@font/arial_nova_light"
+                android:text="@string/no_text"
                 android:textAlignment="center"
                 android:textColor="@color/accent"
                 android:textSize="22sp"
@@ -279,15 +309,6 @@
                 android:text="Mood"
                 android:textColor="@color/heading" />
 
-            <ImageView
-                android:id="@+id/editMood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="80dp"
-                android:layout_toEndOf="@id/mood_title"
-                app:srcCompat="@drawable/ic_edit" />
-
             <TextView
                 android:id="@+id/moodText"
                 android:layout_width="100dp"
@@ -296,6 +317,7 @@
                 android:layout_marginTop="105dp"
                 android:layout_toEndOf="@+id/mood"
                 android:fontFamily="@font/arial_nova_light"
+                android:text="@string/no_text"
                 android:textAlignment="center"
                 android:textColor="@color/accent"
                 android:textSize="22sp"

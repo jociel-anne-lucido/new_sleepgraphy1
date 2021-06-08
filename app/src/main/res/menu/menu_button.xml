@@ -23,6 +23,4 @@
         app:cnb_backgroundColor="#e5e5e5"
         app:cnb_iconColor=" #9A8C98"
         app:cnb_textColor=" #9A8C98" />
-
-
 </menu>

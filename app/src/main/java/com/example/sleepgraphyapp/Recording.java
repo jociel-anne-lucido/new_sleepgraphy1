@@ -36,7 +36,7 @@ public class Recording extends AppCompatActivity {
 
             wakeTime = clock.getText().toString();
 
-            Intent newIntent = new Intent(Recording.this, Analysis.class);
+            Intent newIntent = new Intent(Recording.this, Mood.class);
             newIntent.putExtra("wakeTime", wakeTime);
             newIntent.putExtra("sleepTime", text);
             newIntent.putExtra("totalDur", totalDur);
