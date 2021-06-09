@@ -1,16 +1,11 @@
 package com.example.sleepgraphyapp;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,13 +22,6 @@ public class Tracker extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracker);
-
-        // for notif
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel = new NotificationChannel("Notification", "Notification", NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
 
         time1 = findViewById(R.id.time1Text);
         time2 = findViewById(R.id.time2Text);
@@ -64,16 +52,6 @@ public class Tracker extends AppCompatActivity {
         button = findViewById(R.id.start_button);
         button.setOnClickListener(v -> {
             openRecording();
-
-            // for notif bar
-            NotificationCompat.Builder notif = new NotificationCompat.Builder(Tracker.this, "Notification");
-            notif.setContentTitle("Sleepgraphy");
-            notif.setContentText("Sleep tracking in progress...");
-            notif.setSmallIcon(R.drawable.sleep_symbol);
-            notif.setAutoCancel(true);
-
-            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(Tracker.this);
-            managerCompat.notify(1, notif.build());
         });
     }
 

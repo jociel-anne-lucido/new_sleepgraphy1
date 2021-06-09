@@ -1,7 +1,7 @@
 package com.example.sleepgraphyapp;
 
-import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.widget.Button;
@@ -28,12 +28,17 @@ public class Recording extends AppCompatActivity {
         timer = findViewById(R.id.chronometer_txt);
         clock = findViewById(R.id.textClock);
 
+        // for notif
+        Intent intent1 = new Intent(this, ForegroundService.class);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(intent1);
+        } else {
+            startService(intent1);
+        }
+
         stop_tracker.setOnClickListener(v -> {
             timer.stop();
-
-            // delete notif
-            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            manager.cancelAll();
 
             // from tracker class
             Intent intent = getIntent();
