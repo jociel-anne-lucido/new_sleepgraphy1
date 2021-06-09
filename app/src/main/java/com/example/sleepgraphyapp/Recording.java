@@ -1,5 +1,6 @@
 package com.example.sleepgraphyapp;
 
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -29,6 +30,10 @@ public class Recording extends AppCompatActivity {
 
         stop_tracker.setOnClickListener(v -> {
             timer.stop();
+
+            // delete notif
+            NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            manager.cancelAll();
 
             // from tracker class
             Intent intent = getIntent();

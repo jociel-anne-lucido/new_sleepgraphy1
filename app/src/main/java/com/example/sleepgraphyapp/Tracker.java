@@ -1,11 +1,16 @@
 package com.example.sleepgraphyapp;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -15,24 +20,64 @@ import java.util.Date;
 
 public class Tracker extends AppCompatActivity {
     TextView time1, time2, time3,time4,time5;
-
     private Button button;
-
     String sleepTime;
-
-    SleepCycleData scd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracker);
 
-        time1 =findViewById(R.id.time1Text);
-        time2 =findViewById(R.id.time2Text);
-        time3 =findViewById(R.id.time3Text);
-        time4 =findViewById(R.id.time4Text);
-        time5 =findViewById(R.id.time5Text);
+        // for notif
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("Notification", "Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
 
+        time1 = findViewById(R.id.time1Text);
+        time2 = findViewById(R.id.time2Text);
+        time3 = findViewById(R.id.time3Text);
+        time4 = findViewById(R.id.time4Text);
+        time5 = findViewById(R.id.time5Text);
+
+        DisplayWakeTime();
+
+        BottomNavigationView bottomNavigationView= (BottomNavigationView)findViewById(R.id.bottom_nav);
+        bottomNavigationView.setSelectedItemId(R.id.tracker);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.home:
+                    Intent intent1= new Intent(Tracker.this,Clock.class);
+                    startActivity(intent1);
+                    break;
+                case R.id.tracker:
+                    break;
+                case R.id.analysis:
+                    Intent intent3= new Intent(Tracker.this,Analysis.class);
+                    startActivity(intent3);
+                    break;
+            } return false;
+        });
+
+        button = findViewById(R.id.start_button);
+        button.setOnClickListener(v -> {
+            openRecording();
+
+            // for notif bar
+            NotificationCompat.Builder notif = new NotificationCompat.Builder(Tracker.this, "Notification");
+            notif.setContentTitle("Sleepgraphy");
+            notif.setContentText("Sleep tracking in progress...");
+            notif.setSmallIcon(R.drawable.sleep_symbol);
+            notif.setAutoCancel(true);
+
+            NotificationManagerCompat managerCompat = NotificationManagerCompat.from(Tracker.this);
+            managerCompat.notify(1, notif.build());
+        });
+    }
+
+    public void DisplayWakeTime() {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a");
         String currentTime = simpleDateFormat.format(calendar.getTime());
@@ -59,34 +104,8 @@ public class Tracker extends AppCompatActivity {
             calendar.add(Calendar.MINUTE,30);
             String result5 = simpleDateFormat.format(calendar.getTime());
             time5.setText(result5);
-
         }
-        catch (Exception e) {
-
-        }
-
-        BottomNavigationView bottomNavigationView= (BottomNavigationView)findViewById(R.id.bottom_nav);
-        bottomNavigationView.setSelectedItemId(R.id.tracker);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
-            switch (item.getItemId()) {
-
-                case R.id.home:
-                    Intent intent1= new Intent(Tracker.this,Clock.class);
-                    startActivity(intent1);
-                    break;
-                case R.id.tracker:
-                    break;
-                case R.id.analysis:
-                    Intent intent3= new Intent(Tracker.this,Analysis.class);
-                    startActivity(intent3);
-                    break;
-            }
-            return false;
-        });
-
-        button = findViewById(R.id.start_button);
-        button.setOnClickListener(v -> openRecording());
+        catch (Exception e) { }
     }
 
     public void openRecording (){
@@ -100,6 +119,5 @@ public class Tracker extends AppCompatActivity {
         Intent intent = new Intent (Tracker.this, Recording.class);
         intent.putExtra("sleepTime", sleepTime);
         startActivity(intent);
-
     }
 }
