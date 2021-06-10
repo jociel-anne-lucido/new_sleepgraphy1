@@ -230,7 +230,10 @@ public class Analysis extends AppCompatActivity {
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinY(0);
         graph.getViewport().setMaxY(1);
+
+        graph.getViewport().setScalable(true);
         graph.getViewport().setScrollable(true);
+        graph.getViewport().setScrollableY(true);
 
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
