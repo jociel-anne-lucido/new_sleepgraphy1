@@ -1,7 +1,9 @@
 package com.example.sleepgraphyapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +29,8 @@ public class Signup extends AppCompatActivity {
     String name, age, gender, email, password, uid;
 
     FirebaseAuth auth;
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,8 @@ public class Signup extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
 
         auth = FirebaseAuth.getInstance();
+        pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        editor = pref.edit();
 
         button_next.setOnClickListener(v -> {
             if (!CheckName() | !CheckAge() | !CheckGender() | !CheckEmail() | !CheckPass()) {
@@ -65,7 +71,8 @@ public class Signup extends AppCompatActivity {
 
                     dbRef.setValue(data).addOnCompleteListener(task1 -> {
                         progressBar.setVisibility(View.GONE);
-                        startActivity(new Intent(Signup.this, Assessment.class));
+                        Toast.makeText(Signup.this, "Successfully registered.", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(Signup.this, Clock.class));
                         finish();
                     });
 
@@ -88,9 +95,14 @@ public class Signup extends AppCompatActivity {
             name_txt.setError("Enter name.");
             name_txt.requestFocus();
             return false;
-        } else { return true; }
+        } else {
+            SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString("name", name);
+            editor.apply();
+            return true;
+        }
     }
-
     private boolean CheckAge() {
         age = age_txt.getText().toString().trim();
         if (age.isEmpty()) {
@@ -118,7 +130,11 @@ public class Signup extends AppCompatActivity {
         } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             Toast.makeText(Signup.this, "Please enter a valid email address.", Toast.LENGTH_SHORT).show();
             return false;
-        } else { return true; }
+        } else {
+            editor.putString("email", email);
+            editor.apply();
+            return true;
+        }
     }
 
     private boolean CheckPass() {
@@ -127,11 +143,15 @@ public class Signup extends AppCompatActivity {
             pass_txt.setError("Enter password.");
             pass_txt.requestFocus();
             return false;
-        } else if (password.length() <= 6) {
+        } else if (password.length() < 6) {
             pass_txt.setError("Password should be at least 6 characters long.");
             pass_txt.requestFocus();
             return false;
-        } else { return true; }
+        } else {
+            editor.putString("pass", password);
+            editor.apply();
+            return true;
+        }
     }
 
     // checks if user is already logged in then redirects to homepage if true

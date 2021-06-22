@@ -39,6 +39,7 @@ public class Recording extends AppCompatActivity {
 
         stop_tracker.setOnClickListener(v -> {
             timer.stop();
+            stopService(intent1);
 
             // from tracker class
             Intent intent = getIntent();

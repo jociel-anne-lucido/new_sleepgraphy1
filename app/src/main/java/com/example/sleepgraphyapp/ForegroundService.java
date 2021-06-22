@@ -8,6 +8,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
+
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
@@ -31,6 +32,7 @@ public class ForegroundService extends Service {
                 .setContentText("Sleep tracking in progress...")
                 .setSmallIcon(R.drawable.sleep_symbol)
                 .setContentIntent(pendingIntent)
+                .setOngoing(true)
                 .build();
 
         startForeground(1, notification);

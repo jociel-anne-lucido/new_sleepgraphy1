@@ -60,13 +60,13 @@
         android:id="@+id/nameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/arial_mt_rounded"
         android:text="Name:"
         android:textColor="@color/subtitle"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/settings_txt"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/nametxt" />
 
     <EditText
         android:id="@+id/upd_name"
@@ -129,29 +129,30 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/upd_box8"
         android:layout_width="0dp"
-        android:layout_height="46dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="2dp"
         android:ems="10"
-        android:textSize="15dp"
-        android:hint="Password"
-        android:textColorHint="@color/whitesmoke"
-        android:inputType="textVisiblePassword|textPassword"
         app:passwordToggleEnabled="true"
+        android:textColorHint="@color/whitesmoke"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        android:inputType="textVisiblePassword|textPassword"
         app:layout_constraintEnd_toEndOf="@+id/logout_button"
         app:layout_constraintStart_toStartOf="@+id/nameView"
-        app:layout_constraintTop_toBottomOf="@+id/passView" >
+        app:layout_constraintTop_toBottomOf="@+id/passView">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:id="@+id/upd_pass"
-            android:drawableStart="@drawable/ic_pass"
-            android:background="@color/background"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="-15dp"
+            android:layout_marginTop="-12dp"
+            android:background="@color/background"
+            android:drawableStart="@drawable/ic_pass"
             android:drawablePadding="10dp"
-            android:textSize="16dp"></com.google.android.material.textfield.TextInputEditText>
-
+            android:hint="Password"
+            android:textSize="15sp"></com.google.android.material.textfield.TextInputEditText>
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
@@ -210,11 +211,34 @@
         android:id="@+id/imageView"
         android:layout_width="135dp"
         android:layout_height="135dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/subheading_profile"
         app:srcCompat="@drawable/user_pic" />
+
+    <TextView
+        android:id="@+id/nametxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/arial_mt_rounded"
+        android:text="Name"
+        android:textColor="@color/heading"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
