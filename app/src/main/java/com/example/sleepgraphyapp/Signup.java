@@ -57,6 +57,7 @@ public class Signup extends AppCompatActivity {
             }
 
             progressBar.setVisibility(View.VISIBLE);
+            Toast.makeText(Signup.this, "Please wait while you are redirected to the assessment page.", Toast.LENGTH_SHORT).show();
 
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -71,8 +72,7 @@ public class Signup extends AppCompatActivity {
 
                     dbRef.setValue(data).addOnCompleteListener(task1 -> {
                         progressBar.setVisibility(View.GONE);
-                        Toast.makeText(Signup.this, "Successfully registered.", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(Signup.this, Clock.class));
+                        startActivity(new Intent(Signup.this, Assessment.class));
                         finish();
                     });
 
